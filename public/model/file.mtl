@@ -1,5 +1,5 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
-# ´´½¨µÄÎÄ¼þ:23.05.2015 12:00:17
+# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½:23.05.2015 12:00:17
 
 newmtl wire_177026088
 	Ns 32
@@ -46,7 +46,7 @@ newmtl Material__29
 	Kd 0.4667 0.9294 0.2157
 	Ks 0.7740 0.7740 0.7740
 	Ke 0.0000 0.0000 0.0000
-	map_bump -bm 0.3000 Map__8_·¨Ïß°¼Í¹.tga
+	map_bump -bm 0.3000 Map__8_normal.tga
 
 newmtl Material__30
 	Ns 52.0000
@@ -59,7 +59,7 @@ newmtl Material__30
 	Kd 0.4235 0.9647 0.2118
 	Ks 0.9810 0.9810 0.9810
 	Ke 0.0000 0.0000 0.0000
-	map_bump -bm 0.3000 Map__14_·¨Ïß°¼Í¹.tga
+	map_bump -bm 0.3000 Map__14_normal.tga
 	map_refl Map__16_Raytrace.tga
 
 newmtl Material__31
@@ -215,7 +215,7 @@ newmtl Material__27
 	Kd 0.7529 0.9373 0.5882
 	Ks 0.8550 0.8550 0.8550
 	Ke 0.0000 0.0000 0.0000
-	map_bump -bm 0.3000 Map__11_·¨Ïß°¼Í¹.tga
+	map_bump -bm 0.3000 Map__11_normal.tga
 
 newmtl wire_026177088
 	Ns 32
@@ -238,7 +238,7 @@ newmtl 09___Default
 	Kd 0.5882 0.5882 0.5882
 	Ks 0.7470 0.7470 0.7470
 	Ke 0.0000 0.0000 0.0000
-	map_bump -bm 0.3000 Map__39_·¨Ïß°¼Í¹.tga
+	map_bump -bm 0.3000 Map__39_normal.tga
 
 newmtl 08___Default
 	Ns 53.0000
