@@ -8,89 +8,28 @@ import { Viewer } from 'photo-sphere-viewer';
 import 'photo-sphere-viewer/dist/photo-sphere-viewer.css';
 
 onMounted(() => {
-  // const viewer = new Viewer({
-  //   panorama: 'https://photo-sphere-viewer-data.netlify.app/assets/sphere.jpg',
-  //   container: 'photosphere',
-  //   caption: 'Parc national du Mercantour <b>&copy; Damien Sorel</b>',
-  //   loadingImg: 'https://photo-sphere-viewer.js.org/assets/photosphere-logo.gif',
-  //   defaultLat: -Math.PI / 2,
-  //   defaultLong: Math.PI,
-  //   defaultZoomLvl: 0,
-  //   fisheye: 4,
-  //   navbar: false,
-  // });
-  // viewer.once('ready', () => {
-  //   viewer.renderer.camera.far *= 2;
-  //   viewer.animate({
-  //     properties: {
-  //       lat: { start: -Math.PI / 2, end: 0 },
-  //       long: { start: Math.PI, end: 0 },
-  //       zoom: { start: 0, end: 50 },
-  //       fisheye: { start: 4, end: 0 },
-  //     },
-  //     duration: 2000,
-  //     easing: 'inOutQuad',
-  //     onTick: (properties) => {
-  //       viewer.setOption('fisheye', properties.fisheye);
-  //       viewer.rotate({ longitude: properties.long, latitude: properties.lat });
-  //       viewer.zoom(properties.zoom);
-  //     },
-  //   });
-  // });
   const viewer = new Viewer({
     container: document.querySelector('#photosphere'),
-    // panorama: 'https://photo-sphere-viewer-data.netlify.app/assets/sphere.jpg',
-    panorama: './panorama/5.png',
+    panorama: 'https://photo-sphere-viewer-data.netlify.app/assets/sphere.jpg',
     size: {
       width: window.innerWidth,
       height: window.innerHeight,
     },
+    defaultLat: -Math.PI / 2,
+    defaultLong: Math.PI,
+    fisheye: 2,
     defaultZoomLvl: 10,
     navbar: false,
   });
   viewer.once('ready', () => {
     viewer.animate({
-      longitude: Math.PI,
-      latitude: '20deg',
+      longitude: 0,
+      latitude: 0,
       zoom: 50,
-      speed: '2rpm',
+      speed: '4rpm',
     });
   });
 });
-
-// onMounted(() => {
-//   const viewer = new Viewer({
-//     panorama: 'https://photo-sphere-viewer-data.netlify.app/assets/sphere.jpg',
-//     container: 'photosphere',
-//     caption: 'Parc national du Mercantour <b>&copy; Damien Sorel</b>',
-//     loadingImg: 'https://photo-sphere-viewer.js.org/assets/photosphere-logo.gif',
-//     defaultLat: -Math.PI / 2,
-//     defaultLong: Math.PI,
-//     defaultZoomLvl: 0,
-//     fisheye: 4,
-//     navbar: false,
-//   });
-
-//   viewer.on('ready', () => {
-//     viewer.renderer.camera.far *= 2;
-
-//     viewer.animate({
-//       properties: {
-//         lat: { start: -Math.PI / 2, end: 0 },
-//         long: { start: Math.PI, end: 0 },
-//         zoom: { start: 0, end: 50 },
-//         fisheye: { start: 4, end: 0 },
-//       },
-//       duration: 2000,
-//       easing: 'inOutQuad',
-//       onTick: (properties) => {
-//         viewer.setOption('fisheye', properties.fisheye);
-//         viewer.rotate({ longitude: properties.long, latitude: properties.lat });
-//         viewer.zoom(properties.zoom);
-//       },
-//     });
-//   });
-// });
 </script>
 
 <style scoped>

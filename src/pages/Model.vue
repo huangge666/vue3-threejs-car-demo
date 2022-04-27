@@ -10,9 +10,6 @@
     </div> -->
     <div class="mark">
       <div class="des">
-        <!-- <div class="title">刀片电池</div>
-        <div class="text">单体电池长96mm、宽9mm、高1.35mm</div>
-        <div class="text">可循环充放电3000次以上，续航600公里</div> -->
         <div class="title">前脸设计</div>
         <div class="text">前脸纺锤式的中网格栅设计</div>
         <div class="text">搭配两侧狭长犀利的大灯造型</div>
@@ -30,7 +27,9 @@
 </template>
 
 <script setup>
-import { onMounted, ref, onBeforeUnmount } from 'vue';
+import {
+  onMounted, ref, onBeforeUnmount, watch,
+} from 'vue';
 import * as THREE from 'three';
 import { Viewer } from 'photo-sphere-viewer';
 import 'photo-sphere-viewer/dist/photo-sphere-viewer.css';
@@ -45,13 +44,16 @@ import CircleLine from '../components/CircleLine.js';
 const percentage = ref(100);
 const isShow = ref(false);
 
-const handleSwitch = () => {
-  isShow.value = !isShow.value;
+watch(isShow, (newValue) => {
   const MARK = document.getElementsByClassName('mark');
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < MARK.length; i++) {
-    MARK[i].style.visibility = isShow.value ? 'visible' : 'hidden';
+    MARK[i].style.visibility = newValue ? 'visible' : 'hidden';
   }
+});
+
+const handleSwitch = () => {
+  isShow.value = !isShow.value;
 };
 
 onMounted(() => {
@@ -144,8 +146,9 @@ onMounted(() => {
       }
       waveAnimation();
 
+      const visibility = isShow.value ? 'visible' : 'hidden';
       const mark1 = document.getElementsByClassName('mark')[0];
-      mark1.style.visibility = 'visible';
+      mark1.style.visibility = visibility;
       const label1 = new CSS3DObject(mark1);
       mark1.style.pointerEvents = 'none';
       label1.position.copy(LFSprite.position);
@@ -157,7 +160,7 @@ onMounted(() => {
       model.add(label1);
 
       const mark2 = document.getElementsByClassName('mark')[1];
-      mark2.style.visibility = 'visible';
+      mark2.style.visibility = visibility;
       const label2 = new CSS3DObject(mark2);
       mark2.style.pointerEvents = 'none';
       label2.position.copy(LFSprite.position);
@@ -175,30 +178,12 @@ onMounted(() => {
     },
     (xhr) => {
       percentage.value = +((xhr.loaded / xhr.total) * 100).toFixed(0);
-      console.log(xhr);
+      // console.log(xhr);
     },
     (err) => {
       console.log({ err });
     },
   );
-
-  /**
-  * 进度条
-  */
-  // const FileLoader = new THREE.FileLoader();
-  // FileLoader.load(
-  //   './gltf/car.gltf',
-  //   (file) => {
-  //     console.log({ file });
-  //   },
-  //   (xhr) => {
-  //     percentage.value = +((xhr.loaded / xhr.total) * 100).toFixed(0);
-  //     console.log({ xhr });
-  //   },
-  //   (err) => {
-  //     console.log({ err });
-  //   },
-  // );
 
   /**
   * 光源设置
@@ -270,7 +255,6 @@ onMounted(() => {
 
       const intersects = raycaster.intersectObject(scene.children[6], true);
       if (intersects[0] && flag) {
-        console.log('intersects', intersects[0]);
         if (intersects[0].object.parent.name === '左前门' || intersects[0].object.name === 'LFSprite') {
           if (LFDoor.flag) {
             LFDoor.rotateY(Math.sin(Math.PI / 2));
@@ -311,21 +295,23 @@ onMounted(() => {
   */
   const viewer = new Viewer({
     container: document.querySelector('#photosphere'),
-    // panorama: 'https://photo-sphere-viewer-data.netlify.app/assets/sphere.jpg',
     panorama: './panorama/car2.jpg',
     size: {
       width: window.innerWidth,
       height: window.innerHeight,
     },
-    defaultZoomLvl: 10,
+    defaultLat: -Math.PI / 2,
+    defaultLong: Math.PI,
+    fisheye: 2,
+    defaultZoomLvl: 0,
     navbar: false,
   });
   viewer.once('ready', () => {
     viewer.animate({
-      longitude: Math.PI,
-      latitude: '20deg',
+      longitude: 0,
+      latitude: 0,
       zoom: 50,
-      speed: '2rpm',
+      speed: '4rpm',
     });
   });
 });
@@ -336,7 +322,6 @@ onBeforeUnmount(() => {
   for (let i = 0; i < MARK.length; i++) {
     MARK[i].style.visibility = 'hidden';
   }
-  console.log('onBeforeUnmount');
 });
 </script>
 
@@ -366,6 +351,9 @@ onBeforeUnmount(() => {
   justify-content: space-between;
   /* CSS3设置HTML元素背面不可见 */
   backface-visibility: hidden;
+  -webkit-backface-visibility:hidden;
+  -moz-backface-visibility:hidden;
+  -ms-backface-visibility:hidden;
   background-color:rgba(0, 0, 0, 0.5);
   visibility: hidden;
 }
