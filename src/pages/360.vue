@@ -10,7 +10,8 @@ import 'photo-sphere-viewer/dist/photo-sphere-viewer.css';
 onMounted(() => {
   const viewer = new Viewer({
     container: document.querySelector('#photosphere'),
-    panorama: 'https://photo-sphere-viewer-data.netlify.app/assets/sphere.jpg',
+    // panorama: 'https://photo-sphere-viewer-data.netlify.app/assets/sphere.jpg',
+    panorama: './panorama/car2.jpg',
     size: {
       width: window.innerWidth,
       height: window.innerHeight,

@@ -11,8 +11,8 @@ const material = new THREE.MeshBasicMaterial({
 });
 const Cylinder = new THREE.Mesh(geometry, material);
 Cylinder.translateY(-5);
-const CircleLine = new THREE.Group();
-CircleLine.add(Cylinder);
+const CylinderPlatform = new THREE.Group();
+CylinderPlatform.add(Cylinder);
 const loader = new FontLoader();
 loader.load('./font/helvetiker_bold.typeface.json', (font) => {
   const fontMaterial = new THREE.MeshLambertMaterial({
@@ -24,7 +24,7 @@ loader.load('./font/helvetiker_bold.typeface.json', (font) => {
   const textMesh = new THREE.Mesh(fontGeometry, fontMaterial);
   textMesh.position.z = R;
   textMesh.position.x = -120;
-  CircleLine.add(textMesh);
+  CylinderPlatform.add(textMesh);
 });
 
-export default CircleLine;
+export default CylinderPlatform;

@@ -15,8 +15,10 @@ module.exports = {
     'vue',
   ],
   rules: {
-    "import/no-extraneous-dependencies": 0,
-    "import/no-unresolved": 0,
-    "import/extensions": 0
+    'import/no-extraneous-dependencies': 0,
+    'import/no-unresolved': 0,
+    'import/extensions': 0,
+    'no-console': 0,
+    'no-param-reassign': 0,
   },
 };
