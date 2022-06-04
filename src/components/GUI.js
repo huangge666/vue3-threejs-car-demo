@@ -1,5 +1,5 @@
 import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
-import model from './Model.js';
+import { model } from './Model.js';
 
 /**
  * 创建一个gui对象

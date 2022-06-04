@@ -1,13 +1,13 @@
 <template>
   <div id="BYD">
-    <!-- <div v-if="percentage < 100" class="mask">
+    <div v-if="percentage < 100" class="mask">
       <el-progress
         :text-inside="true"
         :stroke-width="24"
         :percentage="percentage"
         status="success"
       />
-    </div> -->
+    </div>
     <div class="mark">
       <div class="des">
         <div class="title">前脸设计</div>
@@ -45,7 +45,7 @@ import * as THREE from 'three';
 import controls from '../components/Controls.js';
 import { scene, camera, renderer } from '../components/SceneCamera.js';
 import router from '../router';
-import model from '../components/Model.js';
+import { model, percentage } from '../components/Model.js';
 import render from '../components/Render.js';
 import { displayBackgroundAudio, pauseBackgroundAudio } from '../components/Audio.js';
 
@@ -178,6 +178,7 @@ onBeforeUnmount(() => {
   top: 0;
   left: 0;
   background: #000;
+  z-index: 2;
 }
 .el-progress{
   width: 50%;
@@ -189,7 +190,6 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* CSS3设置HTML元素背面不可见 */
   backface-visibility: hidden;
   -webkit-backface-visibility:hidden;
   -moz-backface-visibility:hidden;

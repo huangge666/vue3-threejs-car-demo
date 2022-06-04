@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { ref } from 'vue';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { CreatePointsTags } from './PointsTag.js';
@@ -16,9 +17,11 @@ const loader = new GLTFLoader();
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('./draco/');
 loader.setDRACOLoader(dracoLoader);
+const percentage = ref(100);
 
 loader.load(
   './gltf/2.gltf',
+  // 'https://tomgou.github.io/threejs-demo/gltf/2.gltf',
   (gltf) => {
     // 材质重置
     SetCarMaterial(gltf.scene);
@@ -50,11 +53,15 @@ loader.load(
   },
   // eslint-disable-next-line no-unused-vars
   (xhr) => {
-    // percentage.value = +((xhr.loaded / xhr.total) * 100).toFixed(0);
+    console.log(xhr.loaded, xhr.total);
+    percentage.value = +((xhr.loaded / xhr.total) * 100).toFixed(0);
   },
   (err) => {
     console.log({ err });
   },
 );
 
-export default model;
+export {
+  model,
+  percentage,
+};
