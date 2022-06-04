@@ -1,7 +1,10 @@
-# Vue 3 + Vite
+# pending
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+- 模型加载动画
+- 隧道
+- 雾化
+- 车灯
+- 查看内饰衔接动画
+- 动态显示隐藏标注
+- 添加音效  done
+- 开关后备箱  done

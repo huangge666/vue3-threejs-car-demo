@@ -6,8 +6,8 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 const R = 250;
 const geometry = new THREE.CylinderGeometry(R, R, 10, 128);
 
-const material = new THREE.MeshBasicMaterial({
-  color: 0x42b983,
+const material = new THREE.MeshLambertMaterial({
+  color: 0x006600,
 });
 const Cylinder = new THREE.Mesh(geometry, material);
 Cylinder.translateY(-5);
@@ -19,11 +19,11 @@ loader.load('./font/helvetiker_bold.typeface.json', (font) => {
     color: 0xffffff,
     side: THREE.DoubleSide,
   });
-  const Shapes = font.generateShapes('LEXUS UX300E', 30);
+  const Shapes = font.generateShapes('Build Your Dream', 30);
   const fontGeometry = new THREE.ShapeGeometry(Shapes);
   const textMesh = new THREE.Mesh(fontGeometry, fontMaterial);
   textMesh.position.z = R;
-  textMesh.position.x = -120;
+  textMesh.position.x = -180;
   CylinderPlatform.add(textMesh);
 });
 

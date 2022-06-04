@@ -21,8 +21,10 @@
       </div>
     </div>
     <div id="car"></div>
-    <el-button @click="handleGoInner" class="switch">查看内饰</el-button>
-    <!-- <el-button @click="handleDisplay" class="switch">播放</el-button> -->
+    <div class="button-box">
+      <el-button @click="handleGoInner" class="switch">查看内饰</el-button>
+      <el-button @click="handleDisplayPause" class="switch">{{ DPText }}</el-button>
+    </div>
     <div id="color">
       <div @click="handleSwitchColor(0)" class="colorChoose green"></div>
       <div @click="handleSwitchColor(1)" class="colorChoose gray"></div>
@@ -35,20 +37,24 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue';
+import { onMounted, onBeforeUnmount, ref } from 'vue';
 import * as THREE from 'three';
 // eslint-disable-next-line no-unused-vars
-import guiControls from '../components/GUI.js';
+// import guiControls from '../components/GUI.js';
 // eslint-disable-next-line no-unused-vars
 import controls from '../components/Controls.js';
 import { scene, camera, renderer } from '../components/SceneCamera.js';
 import router from '../router';
-import { model } from '../components/Model.js';
+import model from '../components/Model.js';
 import render from '../components/Render.js';
-import { displayOpenAudio } from '../components/Audio.js';
+import { displayBackgroundAudio, pauseBackgroundAudio } from '../components/Audio.js';
 
 // const percentage = ref(100);
+const DPText = ref('播放');
 
+/**
+ * 汽车模型换肤
+ */
 const setColor = (color) => {
   model.traverse((object) => {
     if (object.type === 'Mesh') {
@@ -58,18 +64,30 @@ const setColor = (color) => {
     }
   });
 };
-
-const handleGoInner = () => {
-  router.push('/360');
-};
-
-const handleDisplay = () => {
-  displayOpenAudio();
-};
-
 const handleSwitchColor = (index) => {
   const colorArr = [0x023911, 0x222222, 0x6a030a, 0x000000, 0xffffff, 0x370239];
   setColor(colorArr[index]);
+};
+
+/**
+ * 查看汽车内饰
+ */
+const handleGoInner = () => {
+  pauseBackgroundAudio();
+  router.push('/360');
+};
+
+/**
+ * 背景音乐播放暂停
+ */
+const handleDisplayPause = () => {
+  if (DPText.value === '播放') {
+    DPText.value = '暂停';
+    displayBackgroundAudio();
+  } else {
+    DPText.value = '播放';
+    pauseBackgroundAudio();
+  }
 };
 
 onMounted(() => {
@@ -125,7 +143,7 @@ onMounted(() => {
    */
   const onWindowResize = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / (window.innerHeight - 50);
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
   };
   window.addEventListener('resize', onWindowResize, false);
@@ -211,10 +229,15 @@ onBeforeUnmount(() => {
   height: 100vh;
 }
 
-.switch {
+.button-box {
+  width: 500px;
   position: absolute;
   bottom: 20px;
   right: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+.switch {
   height: 50px;
   padding: 0 10px;
   background: #fff;
