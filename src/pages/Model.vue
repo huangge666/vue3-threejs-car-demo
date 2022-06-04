@@ -232,7 +232,7 @@ onBeforeUnmount(() => {
 .button-box {
   width: 500px;
   position: absolute;
-  bottom: 20px;
+  bottom: 100px;
   right: 20px;
   display: flex;
   justify-content: flex-end;
